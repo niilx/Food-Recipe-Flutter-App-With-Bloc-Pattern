@@ -2,18 +2,20 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:async/async.dart';
+import 'package:food_recipe/Login/AuthBloc.dart';
 import 'package:food_recipe/ProjectResource.dart';
 import 'package:http/http.dart' as http;
 
 class LoginUser extends StatefulWidget {
   @override
-  _LoginUserState createState() => _LoginUserState();
+  LoginUserState createState() => LoginUserState();
 }
 
-class _LoginUserState extends State<LoginUser> {
+class LoginUserState extends State<LoginUser> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  AuthBloc authBloc;
 
   Widget _backButton() {
     return InkWell(
@@ -50,12 +52,13 @@ class _LoginUserState extends State<LoginUser> {
             height: 10,
           ),
           TextField(
-              controller: isPassword?_passwordController:_emailController,
+              controller: isPassword?passwordController:emailController,
               obscureText: isPassword,
               decoration: InputDecoration(
                   border: InputBorder.none,
                   fillColor: Color(0xfff3f3f4),
-                  filled: true))
+                  filled: true)),
+
         ],
       ),
     );
@@ -63,8 +66,19 @@ class _LoginUserState extends State<LoginUser> {
 
   Widget _submitButton() {
     return InkWell(
-      onTap: (){
-        _signInWithEmailAndPassword();
+      onTap: () async{
+        if(emailController.text.isEmpty || passwordController.text.isEmpty){
+          ProjectResource.showToast("Please Provide mail/password", true);
+        }else {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return Center(child: CircularProgressIndicator(),);
+              });
+          await authBloc.signInWithEmailAndPassword();
+          Navigator.pop(context);
+        }
+
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -159,6 +173,10 @@ class _LoginUserState extends State<LoginUser> {
 
   @override
   Widget build(BuildContext context) {
+    ProjectResource.statusBar();
+    ProjectResource.setScreenSize(context);
+    authBloc = AuthBloc(this);
+
     return Scaffold(
         body: SingleChildScrollView(
             child: Container(
@@ -200,11 +218,6 @@ class _LoginUserState extends State<LoginUser> {
                     ),
                   ),
 
-                //  Positioned(top: 40, left: 0, child: _backButton()),
-//                  Positioned(
-//                      top: -MediaQuery.of(context).size.height * .15,
-//                      right: -MediaQuery.of(context).size.width * .4,
-//                      child: BezierContainer())
                 ],
               ),
             )
@@ -212,37 +225,5 @@ class _LoginUserState extends State<LoginUser> {
     );
   }
 
-  void _signInWithEmailAndPassword() {
 
-    try{
-
-      http.post(
-          ProjectResource.baseUrl+"auth/login",
-          headers: {"Accept": "application/json"},
-          body: {"email": _emailController.text.toString(), "password": _passwordController.text.toString()}
-      ).timeout(Duration(seconds: 30)).then((value){
-        print("status code Token:${value.statusCode}");
-
-        if (value.statusCode < 200 || value.statusCode >= 400 || value == null) {
-          ProjectResource.currentValidUserToken=null;
-
-          print("error : "+value.body);
-          throw new Exception("Error while fetching data ${value.statusCode}");
-        }
-        else{
-          dynamic data=json.decode(value.body);
-         ProjectResource.currentValidUserToken = data["result"]["token"].toString();
-        //  SharedPref.save("user", data);
-          print("New Token Generated:"+value.body);
-          print("TOken:"+ ProjectResource.currentValidUserToken);
-
-
-
-        }
-      });
-    }catch(e){
-
-    }
-
-  }
 }

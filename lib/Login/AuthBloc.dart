@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:food_recipe/Login/Auth.dart';
 import 'package:food_recipe/ProjectResource.dart';
+import 'package:food_recipe/RecipeList/RecipeList.dart';
 import 'package:http/http.dart' as http;
 
 class AuthBloc{
@@ -28,6 +30,7 @@ class AuthBloc{
           //  SharedPref.save("user", data);
 
           print(ProjectResource.currentValidUserToken);
+          Navigator.push(loginUserState.context,  MaterialPageRoute(builder: (context) => RecipeList()));
           ProjectResource.showToast("Successfull Logged In", false);
         }else{
           ProjectResource.showToast("Invalid mail/password", true);

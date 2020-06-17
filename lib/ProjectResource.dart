@@ -26,7 +26,7 @@ class ProjectResource{
   static Color darkRedColor = Color(0xffA94442);
   static Color greyColor = Color(0xffE5E8E8);
   static Color shadowColor = Color(0xff7E92C8).withOpacity(0.2);
-
+  static var pagePadding = EdgeInsets.only(top: 5,left: 20,right: 20);
   static BorderRadiusGeometry roundedBorder = BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10));
 
   static FontWeight fontSemiBold = FontWeight.w600;

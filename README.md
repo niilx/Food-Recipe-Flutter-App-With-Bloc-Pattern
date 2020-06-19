@@ -6,17 +6,18 @@ Food Recipe Mobile App built using Flutter
 
 ## Login Page
 <img src="screenshot/loginUI.png" width="400" >
-![](screenshot/loginUI.png)
+
 
 ## Recipe List Page
+<img src="screenshot/RecipeList.png" width="400" >
 
-![](screenshot/RecipeList.png)
 
 ## Recipe Details Page
+Part 1:
+<img src="screenshot/RecipeDetails.png" width="400" >
+Part 2:
+<img src="screenshot/RecipeDetails2.png" width="400" >
 
-![](screenshot/RecipeDetails.png)
-
-![](screenshot/RecipeDetails2.png)
 
 
 

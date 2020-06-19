@@ -163,7 +163,7 @@ class LoginUserState extends State<LoginUser> {
   Widget _emailPasswordWidget() {
     return Column(
       children: <Widget>[
-        _entryField("Email id"),
+        _entryField("Email"),
         _entryField("Password", isPassword: true),
       ],
     );

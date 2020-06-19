@@ -30,8 +30,8 @@ class AuthBloc{
           //  SharedPref.save("user", data);
 
           print(ProjectResource.currentValidUserToken);
+          ProjectResource.showToast("Successfully Logged In", false);
           Navigator.push(loginUserState.context,  MaterialPageRoute(builder: (context) => RecipeList()));
-          ProjectResource.showToast("Successfull Logged In", false);
         }else{
           ProjectResource.showToast("Invalid mail/password", true);
         }

@@ -17,9 +17,20 @@ class RecipeListElements{
 
   getHeaderSection(){
     return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
+
+        IconButton(
+          padding: EdgeInsets.only(right: ProjectResource.screenWidth*0.05),
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: (){
+            Navigator.pop(recipeListState.context);
+          },
+        )
+        ,
+        Expanded(child: Container(),),
         Align(
-            alignment: Alignment.centerLeft,
+            alignment: Alignment.center,
             child: RichText(
               text: TextSpan(
                 children: [
@@ -28,7 +39,7 @@ class RecipeListElements{
                     style: TextStyle(color: Colors.black,fontSize: ProjectResource.headerFontSize*1.1),
                   ),
                   TextSpan(
-                    text: '\nRecipes',
+                    text: ' Recipes',
                     style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,fontSize: ProjectResource.headerFontSize*1.2),
                   ),
 

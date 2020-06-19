@@ -1,10 +1,24 @@
-# food_recipe
+# Food Recipe Mobile App
 
-A new Flutter application.
+Food Recipe Mobile App built using Flutter
 
-## Getting Started
+## ScreenShot of Pages
 
-This project is a starting point for a Flutter application.
+## Login Page
+
+![](screenshot/loginUI.png)
+
+## Recipe List Page
+
+![](screenshot/RecipeList.png)
+
+## Recipe Details Page
+
+![](screenshot/RecipeDetails.png)
+
+![](screenshot/RecipeDetails2.png)
+
+
 
 A few resources to get you started if this is your first Flutter project:
 

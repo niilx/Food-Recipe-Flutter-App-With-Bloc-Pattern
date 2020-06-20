@@ -2,7 +2,7 @@
 
 Food Recipe Mobile App built using Flutter
 
-## ScreenShot of Pages
+## ScreenShot of all the pages
 
 ## Login Page
 <img src="screenshot/loginUI.png" width="400" >
